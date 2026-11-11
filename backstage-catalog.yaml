@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "php-confluent-schema-registry-api"
+  description: "A PHP 8.2+ library to consume the Confluent Schema Registry REST API"
+spec:
+  type: "library"
+  lifecycle: production
+  owner: "group:default/team-policy-operations-italy"
+  system: prima.it
