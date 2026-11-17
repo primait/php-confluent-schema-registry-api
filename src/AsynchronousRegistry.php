@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PrimaAssicurazioni\SchemaRegistryApi;
 
 use Apache\Avro\Schema\AvroSchema;
-use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
 use GuzzleHttp\Promise\PromiseInterface;
+use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
 
 /**
  * {@inheritdoc}

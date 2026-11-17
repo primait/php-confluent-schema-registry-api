@@ -6,14 +6,14 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Registry;
 
 use Apache\Avro\Schema\AvroSchema;
 use Closure;
-use PrimaAssicurazioni\SchemaRegistryApi\AsynchronousRegistry;
-use PrimaAssicurazioni\SchemaRegistryApi\Exception\ExceptionMap;
-use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Utils;
 use InvalidArgumentException;
+use PrimaAssicurazioni\SchemaRegistryApi\AsynchronousRegistry;
+use PrimaAssicurazioni\SchemaRegistryApi\Exception\ExceptionMap;
+use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;

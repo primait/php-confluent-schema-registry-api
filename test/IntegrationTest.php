@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PrimaAssicurazioni\SchemaRegistryApi\Test;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
+use PHPUnit\Framework\TestCase;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\ExceptionMap;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\IncompatibleAvroSchemaException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\InvalidAvroSchemaException;
@@ -11,10 +15,6 @@ use PrimaAssicurazioni\SchemaRegistryApi\Exception\InvalidVersionException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\SchemaNotFoundException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\SubjectNotFoundException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\VersionNotFoundException;
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\RequestException;
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use const PrimaAssicurazioni\SchemaRegistryApi\Constants\COMPATIBILITY_BACKWARD;
 use const PrimaAssicurazioni\SchemaRegistryApi\Constants\COMPATIBILITY_FORWARD;

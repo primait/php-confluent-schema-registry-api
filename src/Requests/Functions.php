@@ -3,8 +3,8 @@
 namespace PrimaAssicurazioni\SchemaRegistryApi\Requests;
 
 use Assert\Assert;
-use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
 use GuzzleHttp\Psr7\Request;
+use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
 use Psr\Http\Message\RequestInterface;
 use const PrimaAssicurazioni\SchemaRegistryApi\Constants\ACCEPT_HEADER;
 use const PrimaAssicurazioni\SchemaRegistryApi\Constants\COMPATIBILITY_BACKWARD;

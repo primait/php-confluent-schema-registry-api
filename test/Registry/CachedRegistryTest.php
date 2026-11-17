@@ -6,15 +6,15 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Test\Registry;
 
 use Apache\Avro\Schema\AvroSchema;
 use Apache\Avro\Schema\AvroSchemaParseException;
+use GuzzleHttp\Promise\FulfilledPromise;
+use GuzzleHttp\Promise\PromiseInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\SchemaRegistryException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\SubjectNotFoundException;
 use PrimaAssicurazioni\SchemaRegistryApi\Registry;
 use PrimaAssicurazioni\SchemaRegistryApi\Registry\CacheAdapter;
 use PrimaAssicurazioni\SchemaRegistryApi\Registry\CachedRegistry;
-use GuzzleHttp\Promise\FulfilledPromise;
-use GuzzleHttp\Promise\PromiseInterface;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 
 class CachedRegistryTest extends TestCase
 {

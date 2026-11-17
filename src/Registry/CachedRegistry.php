@@ -6,10 +6,10 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Registry;
 
 use Apache\Avro\Schema\AvroSchema;
 use Exception;
+use GuzzleHttp\Promise\PromiseInterface;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\SchemaRegistryException;
 use PrimaAssicurazioni\SchemaRegistryApi\Registry;
 use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
-use GuzzleHttp\Promise\PromiseInterface;
 use function call_user_func;
 
 /**

@@ -7,6 +7,7 @@ $finder = PhpCsFixer\Finder::create()
     ->in('test');
 
 return (new PhpCsFixer\Config())
+    ->setParallelConfig()
     ->setRules(
         [
             'no_unused_imports' => true,

@@ -6,11 +6,11 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Registry;
 
 use Apache\Avro\Schema\AvroSchema;
 use Exception;
+use GuzzleHttp\Promise\PromiseInterface;
+use LogicException;
 use PrimaAssicurazioni\SchemaRegistryApi\AsynchronousRegistry;
 use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
 use PrimaAssicurazioni\SchemaRegistryApi\SynchronousRegistry;
-use GuzzleHttp\Promise\PromiseInterface;
-use LogicException;
 
 /**
  * {@inheritdoc}

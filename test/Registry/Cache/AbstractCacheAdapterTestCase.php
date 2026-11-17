@@ -6,8 +6,8 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Test\Registry\Cache;
 
 use Apache\Avro\Schema\AvroSchema;
 use Apache\Avro\Schema\AvroSchemaParseException;
-use PrimaAssicurazioni\SchemaRegistryApi\Registry\CacheAdapter;
 use PHPUnit\Framework\TestCase;
+use PrimaAssicurazioni\SchemaRegistryApi\Registry\CacheAdapter;
 
 abstract class AbstractCacheAdapterTestCase extends TestCase
 {

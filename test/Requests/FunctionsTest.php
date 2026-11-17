@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PrimaAssicurazioni\SchemaRegistryApi\Test\Requests;
 
-use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroName;
-use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroName;
+use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
 use const PrimaAssicurazioni\SchemaRegistryApi\Constants\ACCEPT_HEADER;
 use const PrimaAssicurazioni\SchemaRegistryApi\Constants\ACCEPT_HEADER_KEY;
 use const PrimaAssicurazioni\SchemaRegistryApi\Constants\COMPATIBILITY_BACKWARD;

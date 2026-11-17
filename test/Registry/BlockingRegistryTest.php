@@ -6,13 +6,13 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Test\Registry;
 
 use Apache\Avro\Schema\AvroSchema;
 use Apache\Avro\Schema\AvroSchemaParseException;
+use GuzzleHttp\Promise\FulfilledPromise;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use PrimaAssicurazioni\SchemaRegistryApi\AsynchronousRegistry;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\SchemaRegistryException;
 use PrimaAssicurazioni\SchemaRegistryApi\Registry\BlockingRegistry;
 use PrimaAssicurazioni\SchemaRegistryApi\SynchronousRegistry;
-use GuzzleHttp\Promise\FulfilledPromise;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 class BlockingRegistryTest extends TestCase

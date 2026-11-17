@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace PrimaAssicurazioni\SchemaRegistryApi\Test\Exception;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
+use LogicException;
+use PHPUnit\Framework\TestCase;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\AbstractSchemaRegistryException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\BackendDataStoreException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\ExceptionMap;
@@ -17,11 +22,6 @@ use PrimaAssicurazioni\SchemaRegistryApi\Exception\SchemaNotFoundException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\SchemaRegistryException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\SubjectNotFoundException;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\VersionNotFoundException;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
-use LogicException;
-use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 class ExceptionMapTest extends TestCase
