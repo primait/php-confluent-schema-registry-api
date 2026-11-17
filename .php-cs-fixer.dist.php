@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
+
 $finder = PhpCsFixer\Finder::create()
     ->in('src')
     ->in('test');
 
 return (new PhpCsFixer\Config())
-    ->setParallelConfig()
+    ->setParallelConfig(ParallelConfigFactory::detect())
     ->setRules(
         [
             'no_unused_imports' => true,
