@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+spec:
+  type: library
+  lifecycle: production
+  owner: team-policy-operations-italy
+  system: prima.it
+metadata:
+  name: php-confluent-schema-registry-api
+  description: Avro SerDe for PHP
+  tags:
+    - php
+  links:
+    - url: https://github.com/primait/php-confluent-schema-registry-api
+      icon: github
+      title: github repository

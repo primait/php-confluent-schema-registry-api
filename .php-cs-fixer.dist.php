@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
+
+$finder = PhpCsFixer\Finder::create()
+    ->in('src')
+    ->in('test');
+
+return (new PhpCsFixer\Config())
+    ->setParallelConfig(ParallelConfigFactory::detect())
+    ->setRules(
+        [
+            'no_unused_imports' => true,
+            'ordered_imports' => [
+                'sort_algorithm' => 'alpha',
+                'imports_order' => ['class', 'const', 'function'],
+            ],
+            'phpdoc_summary' => false,
+            'phpdoc_to_comment' => false,
+            'concat_space' => ['spacing' => 'one'],
+            'array_syntax' => ['syntax' => 'short'],
+        ]
+    )
+    ->setFinder($finder)
+    ->setCacheFile('.cache/.php_cs.' . getenv('PHP_VERSION') . '.cache');
