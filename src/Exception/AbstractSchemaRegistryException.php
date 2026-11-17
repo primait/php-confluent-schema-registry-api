@@ -9,7 +9,7 @@ use RuntimeException;
 
 abstract class AbstractSchemaRegistryException extends RuntimeException implements SchemaRegistryException
 {
-    public const ERROR_CODE = 0;
+    public const int ERROR_CODE = 0;
 
     final public static function errorCode(): int
     {

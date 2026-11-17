@@ -78,16 +78,12 @@ jobs:
     strategy:
       matrix:
         php:
-          - version: '8.2'
-            composer: --prefer-lowest
           - version: '8.3'
             composer: --prefer-lowest
           - version: '8.4'
             composer: --prefer-lowest
           - version: '8.5'
             composer: --prefer-lowest
-          - version: '8.2'
-            composer: --prefer-stable
           - version: '8.3'
             composer: --prefer-stable
           - version: '8.4'

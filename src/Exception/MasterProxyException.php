@@ -6,5 +6,5 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Exception;
 
 class MasterProxyException extends AbstractSchemaRegistryException
 {
-    public const ERROR_CODE = 50003;
+    public const int ERROR_CODE = 50003;
 }

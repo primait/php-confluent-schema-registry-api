@@ -6,5 +6,6 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Exception;
 
 class IncompatibleAvroSchemaException extends AbstractSchemaRegistryException
 {
-    public const ERROR_CODE = 409;
+    public const int ERROR_CODE = 40901;
+    public const int LEGACY_ERROR_CODE = 409;
 }
