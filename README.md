@@ -1,5 +1,7 @@
 # Confluent Schema Registry PHP API
 
+This is a fork of the original library [flix-tech/confluent-schema-registry-api](https://packagist.org/packages/flix-tech/confluent-schema-registry-api)
+
 [![schema-registry-ci Actions Status](https://github.com/primait/php-schema-registry-php-client/workflows/schema-registry-ci/badge.svg?branch=master)](https://github.com/primait/php-schema-registry-php-client/actions)
 
 A PHP 8.2+ library to consume the Confluent Schema Registry REST API. It provides low level functions to create PSR-7
@@ -71,8 +73,8 @@ major version upgrades will have incompatibilities that will be released in the 
 <?php
 
 use GuzzleHttp\Client;
-use FlixTech\SchemaRegistryApi\Registry\PromisingRegistry;
-use FlixTech\SchemaRegistryApi\Exception\SchemaRegistryException;
+use PrimaAssicurazioni\SchemaRegistryApi\Registry\PromisingRegistry;
+use PrimaAssicurazioni\SchemaRegistryApi\Exception\SchemaRegistryException;
 
 $registry = new PromisingRegistry(
     new Client(['base_uri' => 'registry.example.com'])
@@ -134,8 +136,8 @@ $schemaId = $registry->schemaId('test-subject', $schema)->wait();
 ```php
 <?php
 
-use FlixTech\SchemaRegistryApi\Registry\BlockingRegistry;
-use FlixTech\SchemaRegistryApi\Registry\PromisingRegistry;
+use PrimaAssicurazioni\SchemaRegistryApi\Registry\BlockingRegistry;
+use PrimaAssicurazioni\SchemaRegistryApi\Registry\PromisingRegistry;
 use GuzzleHttp\Client;
 
 $registry = new BlockingRegistry(
@@ -167,11 +169,11 @@ It supports both async and sync APIs.
 ```php
 <?php
 
-use FlixTech\SchemaRegistryApi\Registry\BlockingRegistry;
-use FlixTech\SchemaRegistryApi\Registry\PromisingRegistry;
-use FlixTech\SchemaRegistryApi\Registry\CachedRegistry;
-use FlixTech\SchemaRegistryApi\Registry\Cache\AvroObjectCacheAdapter;
-use FlixTech\SchemaRegistryApi\Registry\Cache\DoctrineCacheAdapter;
+use PrimaAssicurazioni\SchemaRegistryApi\Registry\BlockingRegistry;
+use PrimaAssicurazioni\SchemaRegistryApi\Registry\PromisingRegistry;
+use PrimaAssicurazioni\SchemaRegistryApi\Registry\CachedRegistry;
+use PrimaAssicurazioni\SchemaRegistryApi\Registry\Cache\AvroObjectCacheAdapter;
+use PrimaAssicurazioni\SchemaRegistryApi\Registry\Cache\DoctrineCacheAdapter;
 use Doctrine\Common\Cache\ArrayCache;
 use GuzzleHttp\Client;
 
