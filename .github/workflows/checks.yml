@@ -29,13 +29,13 @@ jobs:
       matrix:
         php:
           - version: '8.2'
-            xdebug: '3.5.0'
+            xdebug: '3.5.3'
           - version: '8.3'
-            xdebug: '3.5.0'
+            xdebug: '3.5.3'
           - version: '8.4'
-            xdebug: '3.5.0'
+            xdebug: '3.5.3'
           - version: '8.5'
-            xdebug: '3.5.0'
+            xdebug: '3.5.3'
     runs-on: ubuntu-24.04
     steps:
       -
@@ -120,7 +120,7 @@ jobs:
             composer update --no-interaction --no-scripts --no-ansi ${{ matrix.php.composer }}
       -
         name: Run PHPStan analysis
-        if: ${{ matrix.php.version == '8.2' && matrix.php.composer == '--prefer-stable' }}
+        if: ${{ matrix.php.version == '8.3' && matrix.php.composer == '--prefer-stable' }}
         run: |
           chmod a+x bin/phpstan.phar
           docker run -i --rm --net=host --sig-proxy=true --pid=host -m 4000M --entrypoint="php" \
@@ -128,7 +128,7 @@ jobs:
             -d memory_limit=4G -d xdebug.mode=off bin/phpstan.phar analyse
       -
         name: Run CS Fixer
-        if: ${{ matrix.php.version == '8.2' && matrix.php.composer == '--prefer-stable' }}
+        if: ${{ matrix.php.version == '8.3' && matrix.php.composer == '--prefer-stable' }}
         run: |
           chmod a+x bin/php-cs-fixer.phar
           docker run -i --rm --net=host --sig-proxy=true --pid=host -m 1000M --entrypoint="php" \
@@ -138,21 +138,21 @@ jobs:
             src test
       -
         name: Run PHPUnit
-        if: ${{ !(matrix.php.version == '8.2' && matrix.php.composer == '--prefer-stable') }}
+        if: ${{ !(matrix.php.version == '8.3' && matrix.php.composer == '--prefer-stable') }}
         run: |
           docker run -i --rm --net=host --sig-proxy=true --pid=host \
             -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" -w "${GITHUB_WORKSPACE}" schema-registry-client:${{ matrix.php.version }} \
             vendor/bin/phpunit --exclude-group integration
       -
         name: Run PHPUnit with Coverage Report
-        if: ${{ matrix.php.version == '8.2' && matrix.php.composer == '--prefer-stable' }}
+        if: ${{ matrix.php.version == '8.3' && matrix.php.composer == '--prefer-stable' }}
         run: |
           mkdir -p build
           docker run -i --rm --net=host --sig-proxy=true --pid=host \
             -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" -w "${GITHUB_WORKSPACE}" schema-registry-client:${{ matrix.php.version }} \
             -d xdebug.mode=coverage vendor/bin/phpunit --exclude-group integration --coverage-clover=build/coverage.clover --coverage-text
       - name: Publish code coverage
-        if: ${{ matrix.php.version == '8.2' && matrix.php.composer == '--prefer-stable' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        if: ${{ matrix.php.version == '8.3' && matrix.php.composer == '--prefer-stable' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CODE_CLIMATE_REPORTER_ID}}
@@ -182,16 +182,16 @@ jobs:
         name: Download docker image
         uses: actions/download-artifact@v7
         with:
-          name: schema-registry-client-8.2
+          name: schema-registry-client-8.3
       -
         name: Load docker image
         run: |
-          docker load -i schema-registry-client-8.2.tgz
+          docker load -i schema-registry-client-8.3.tgz
       -
         name: Install vendors
         run: |
           docker run -i --rm --net=host --sig-proxy=true --pid=host \
-            -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" -w "${GITHUB_WORKSPACE}" schema-registry-client:8.2 \
+            -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" -w "${GITHUB_WORKSPACE}" schema-registry-client:8.3 \
             composer update --no-interaction --no-scripts --no-ansi --prefer-stable
       -
         name: Run PHPUnit Integration
@@ -202,7 +202,7 @@ jobs:
           make platform
           docker run -i --rm --net=host --sig-proxy=true --pid=host \
             -e ENABLE_INTEGRATION_TEST=1 -e TEST_SCHEMA_REGISTRY_HOST=172.68.0.103 -e TEST_SCHEMA_REGISTRY_PORT=8081 \
-            -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" -w "${GITHUB_WORKSPACE}" schema-registry-client:8.2 \
+            -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" -w "${GITHUB_WORKSPACE}" schema-registry-client:8.3 \
             vendor/bin/phpunit --group integration
 
   alls-green:
