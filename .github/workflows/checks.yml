@@ -109,10 +109,19 @@ jobs:
         run: |
           docker load -i schema-registry-client-${{ matrix.php.version }}.tgz
       -
+        name: Cache Composer downloads
+        uses: actions/cache@v6
+        with:
+          path: ${{ runner.temp }}/composer-cache
+          key: ${{ runner.os }}-composer-${{ matrix.php.version }}-${{ matrix.php.composer }}-${{ hashFiles('composer.lock') }}
+      -
         name: Install vendors
         run: |
           docker run -i --rm --net=host --sig-proxy=true --pid=host \
-            -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" -w "${GITHUB_WORKSPACE}" schema-registry-client:${{ matrix.php.version }} \
+            -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" \
+            -v "${{ runner.temp }}/composer-cache:/tmp/composer-cache" \
+            -e COMPOSER_CACHE_DIR=/tmp/composer-cache \
+            -w "${GITHUB_WORKSPACE}" schema-registry-client:${{ matrix.php.version }} \
             composer update --no-interaction --no-scripts --no-ansi ${{ matrix.php.composer }}
       -
         name: Run PHPStan analysis
@@ -176,10 +185,19 @@ jobs:
         run: |
           docker load -i schema-registry-client-8.3.tgz
       -
+        name: Cache Composer downloads
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/composer-cache
+          key: ${{ runner.os }}-composer-8.3-prefer-stable-${{ hashFiles('composer.lock') }}
+      -
         name: Install vendors
         run: |
           docker run -i --rm --net=host --sig-proxy=true --pid=host \
-            -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" -w "${GITHUB_WORKSPACE}" schema-registry-client:8.3 \
+            -v "${GITHUB_WORKSPACE}":"${GITHUB_WORKSPACE}" \
+            -v "${{ runner.temp }}/composer-cache:/tmp/composer-cache" \
+            -e COMPOSER_CACHE_DIR=/tmp/composer-cache \
+            -w "${GITHUB_WORKSPACE}" schema-registry-client:8.3 \
             composer update --no-interaction --no-scripts --no-ansi --prefer-stable
       -
         name: Run PHPUnit Integration
