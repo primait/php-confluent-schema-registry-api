@@ -6,5 +6,5 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Exception;
 
 class InvalidCompatibilityLevelException extends AbstractSchemaRegistryException
 {
-    public const ERROR_CODE = 42203;
+    public const int ERROR_CODE = 42203;
 }

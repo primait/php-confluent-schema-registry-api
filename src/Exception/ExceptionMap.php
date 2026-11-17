@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PrimaAssicurazioni\SchemaRegistryApi\Exception;
 
-use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
@@ -14,16 +13,13 @@ use function sprintf;
 
 final class ExceptionMap
 {
-    public const UNKNOWN_ERROR_MESSAGE = 'Unknown Error';
-    public const ERROR_CODE_FIELD_NAME = 'error_code';
-    public const ERROR_MESSAGE_FIELD_NAME = 'message';
+    public const string UNKNOWN_ERROR_MESSAGE = 'Unknown Error';
+    public const string ERROR_CODE_FIELD_NAME = 'error_code';
+    public const string ERROR_MESSAGE_FIELD_NAME = 'message';
 
-    /**
-     * @var ExceptionMap
-     */
-    private static $instance;
+    private static ?self $instance = null;
 
-    public static function instance(): ExceptionMap
+    public static function instance(): self
     {
         if (null === self::$instance) {
             self::$instance = new self();
@@ -89,7 +85,7 @@ final class ExceptionMap
             }
 
             return $decodedBody;
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             throw new RuntimeException(
                 sprintf(
                     'Invalid message body received - cannot find "error_code" field in response body "%s"',
@@ -103,39 +99,19 @@ final class ExceptionMap
 
     private function mapErrorCodeToException(int $errorCode, string $errorMessage): SchemaRegistryException
     {
-        switch ($errorCode) {
-            case IncompatibleAvroSchemaException::errorCode():
-                return new IncompatibleAvroSchemaException($errorMessage, $errorCode);
-
-            case BackendDataStoreException::errorCode():
-                return new BackendDataStoreException($errorMessage, $errorCode);
-
-            case OperationTimedOutException::errorCode():
-                return new OperationTimedOutException($errorMessage, $errorCode);
-
-            case MasterProxyException::errorCode():
-                return new MasterProxyException($errorMessage, $errorCode);
-
-            case InvalidVersionException::errorCode():
-                return new InvalidVersionException($errorMessage, $errorCode);
-
-            case InvalidAvroSchemaException::errorCode():
-                return new InvalidAvroSchemaException($errorMessage, $errorCode);
-
-            case SchemaNotFoundException::errorCode():
-                return new SchemaNotFoundException($errorMessage, $errorCode);
-
-            case SubjectNotFoundException::errorCode():
-                return new SubjectNotFoundException($errorMessage, $errorCode);
-
-            case VersionNotFoundException::errorCode():
-                return new VersionNotFoundException($errorMessage, $errorCode);
-
-            case InvalidCompatibilityLevelException::errorCode():
-                return new InvalidCompatibilityLevelException($errorMessage, $errorCode);
-
-            default:
-                throw new RuntimeException(sprintf('Unknown error code "%d"', $errorCode));
-        }
+        return match ($errorCode) {
+            IncompatibleAvroSchemaException::errorCode(),
+            IncompatibleAvroSchemaException::LEGACY_ERROR_CODE => new IncompatibleAvroSchemaException($errorMessage, $errorCode),
+            BackendDataStoreException::errorCode() => new BackendDataStoreException($errorMessage, $errorCode),
+            OperationTimedOutException::errorCode() => new OperationTimedOutException($errorMessage, $errorCode),
+            MasterProxyException::errorCode() => new MasterProxyException($errorMessage, $errorCode),
+            InvalidVersionException::errorCode() => new InvalidVersionException($errorMessage, $errorCode),
+            InvalidAvroSchemaException::errorCode() => new InvalidAvroSchemaException($errorMessage, $errorCode),
+            SchemaNotFoundException::errorCode() => new SchemaNotFoundException($errorMessage, $errorCode),
+            SubjectNotFoundException::errorCode() => new SubjectNotFoundException($errorMessage, $errorCode),
+            VersionNotFoundException::errorCode() => new VersionNotFoundException($errorMessage, $errorCode),
+            InvalidCompatibilityLevelException::errorCode() => new InvalidCompatibilityLevelException($errorMessage, $errorCode),
+            default => throw new RuntimeException(sprintf('Unknown error code "%d"', $errorCode)),
+        };
     }
 }

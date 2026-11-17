@@ -47,7 +47,7 @@ compliant requests that can be used as well as high level abstractions to ease d
 This library is installed via [`composer`](http://getcomposer.org).
 
 ```bash
-composer require mattiabasone/confluent-schema-registry-api
+composer require prima-assicurazioni/confluent-schema-registry-api
 ```
 
 > **NOTE**

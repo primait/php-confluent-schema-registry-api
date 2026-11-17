@@ -6,5 +6,5 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Exception;
 
 class SchemaNotFoundException extends AbstractSchemaRegistryException
 {
-    public const ERROR_CODE = 40403;
+    public const int ERROR_CODE = 40403;
 }

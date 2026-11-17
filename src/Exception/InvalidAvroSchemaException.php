@@ -6,5 +6,5 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Exception;
 
 class InvalidAvroSchemaException extends AbstractSchemaRegistryException
 {
-    public const ERROR_CODE = 42201;
+    public const int ERROR_CODE = 42201;
 }

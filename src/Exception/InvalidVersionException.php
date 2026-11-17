@@ -6,5 +6,5 @@ namespace PrimaAssicurazioni\SchemaRegistryApi\Exception;
 
 class InvalidVersionException extends AbstractSchemaRegistryException
 {
-    public const ERROR_CODE = 42202;
+    public const int ERROR_CODE = 42202;
 }
