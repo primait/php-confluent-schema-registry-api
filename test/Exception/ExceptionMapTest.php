@@ -36,8 +36,7 @@ class ExceptionMapTest extends TestCase
             'Invalid Avro schema',
             42201,
             (ExceptionMap::instance())(
-                new RequestException(
-                '422 Unprocessable Entity',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         422,
@@ -59,8 +58,7 @@ class ExceptionMapTest extends TestCase
             'Incompatible Avro schema',
             409,
             (ExceptionMap::instance())(
-                new RequestException(
-                    '409 Conflict',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         409,
@@ -82,8 +80,7 @@ class ExceptionMapTest extends TestCase
             'Error in the backend datastore',
             50001,
             (ExceptionMap::instance())(
-                new RequestException(
-                    '500 Internal Server Error',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         500,
@@ -105,8 +102,7 @@ class ExceptionMapTest extends TestCase
             'Invalid compatibility level',
             42203,
             (ExceptionMap::instance())(
-                new RequestException(
-                    '422 Unprocessable Entity',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         422,
@@ -128,8 +124,7 @@ class ExceptionMapTest extends TestCase
             'Invalid version',
             42202,
             (ExceptionMap::instance())(
-                new RequestException(
-                    '422 Unprocessable Entity',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         422,
@@ -151,8 +146,7 @@ class ExceptionMapTest extends TestCase
             'Error while forwarding the request to the master',
             50003,
             (ExceptionMap::instance())(
-                new RequestException(
-                    '500 Internal server Error',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         500,
@@ -174,8 +168,7 @@ class ExceptionMapTest extends TestCase
             'Operation timed out',
             50002,
             (ExceptionMap::instance())(
-                new RequestException(
-                    '500 Internal server Error',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         500,
@@ -197,8 +190,7 @@ class ExceptionMapTest extends TestCase
             'Schema not found',
             40403,
             (ExceptionMap::instance())(
-                new RequestException(
-                    '404 Not Found',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         404,
@@ -220,8 +212,7 @@ class ExceptionMapTest extends TestCase
             'Subject not found',
             40401,
             (ExceptionMap::instance())(
-                new RequestException(
-                    '404 Not Found',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         404,
@@ -243,8 +234,7 @@ class ExceptionMapTest extends TestCase
             'Version not found',
             40402,
             (ExceptionMap::instance())(
-                new RequestException(
-                    '404 Not Found',
+                RequestException::create(
                     new Request('GET', '/'),
                     new Response(
                         404,
@@ -290,8 +280,7 @@ class ExceptionMapTest extends TestCase
         $this->expectExceptionMessage('Invalid message body received - cannot find "error_code" field in response body');
 
         (ExceptionMap::instance())(
-            new RequestException(
-                '404 Not Found',
+            RequestException::create(
                 new Request('GET', '/'),
                 new Response(
                     404,
@@ -311,8 +300,7 @@ class ExceptionMapTest extends TestCase
         $this->expectExceptionMessage('Unknown error code "99999"');
 
         (ExceptionMap::instance())(
-            new RequestException(
-                '404 Not Found',
+            RequestException::create(
                 new Request('GET', '/'),
                 new Response(
                     404,
