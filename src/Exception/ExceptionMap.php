@@ -57,13 +57,21 @@ final class ExceptionMap
 
     private function guardAgainstMissingResponse(RequestException $exception): ResponseInterface
     {
-        $response = $exception->getResponse();
+        $response = $this->extractResponse($exception);
 
-        if (!$response) {
+        if (!$response instanceof ResponseInterface) {
             throw new RuntimeException('RequestException has no response to inspect', 0, $exception);
         }
 
         return $response;
+    }
+
+    /**
+     * Guzzle 7 exposes getResponse() on every RequestException, Guzzle 8 only on its ResponseException subclass.
+     */
+    private function extractResponse(object $exception): mixed
+    {
+        return method_exists($exception, 'getResponse') ? $exception->getResponse() : null;
     }
 
     /**
@@ -73,7 +81,7 @@ final class ExceptionMap
     private function guardAgainstMissingErrorCode(ResponseInterface $response): array
     {
         try {
-            $decodedBody = \GuzzleHttp\json_decode((string) $response->getBody(), true);
+            $decodedBody = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
             if (!is_array($decodedBody) || !array_key_exists(self::ERROR_CODE_FIELD_NAME, $decodedBody)) {
                 throw new RuntimeException(

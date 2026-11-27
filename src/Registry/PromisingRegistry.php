@@ -9,8 +9,8 @@ use Closure;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\Utils;
 use InvalidArgumentException;
+use JsonException;
 use PrimaAssicurazioni\SchemaRegistryApi\AsynchronousRegistry;
 use PrimaAssicurazioni\SchemaRegistryApi\Exception\ExceptionMap;
 use PrimaAssicurazioni\SchemaRegistryApi\Schema\AvroReference;
@@ -175,7 +175,11 @@ class PromisingRegistry implements AsynchronousRegistry
         $body = (string) $response->getBody();
 
         try {
-            $decoded = Utils::jsonDecode($body, true);
+            try {
+                $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+            } catch (JsonException $e) {
+                throw new InvalidArgumentException('json_decode error: ' . $e->getMessage(), $e->getCode(), $e);
+            }
 
             if (!is_array($decoded)) {
                 throw new InvalidArgumentException(
